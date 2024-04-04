@@ -53,6 +53,13 @@ public function tambah()
         session()->setFlashdata('message', 'Data dosen berhasil ditambahkan.');
 
         // Redirect ke halaman index atau halaman lainnya
+        $token = getenv('TELEGRAM_BOT_TOKEN');//token bot
+		$datas = [
+		'text' =>"contoh pesan telegram dari PHP",
+		'chat_id' => getenv('TELEGRAM_CHAT_ID')
+        ]; 
+       
+		file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query($datas) );
         return redirect()->to('/dosen');
     }
 }
